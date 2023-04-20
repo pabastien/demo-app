@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { Button, Card, Container } from 'react-bootstrap'
+import { data } from './data'
+import { useRef } from 'react'
+import 'bootstrap/dist/css/bootstrap.css'
+import Popup from './components/Popup'
 
 function App() {
+  const popupRef = useRef();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container className="p-4">
+        <Card bg="light" style={{ width: "28rem" }}>
+          <Card.Header>{data.name}</Card.Header>
+          <Card.Body>
+            <Card.Title>{data.title}</Card.Title>
+            <Card.Text>{data.description}</Card.Text>
+            <div className='buttons'>
+              <Button variant="primary" onClick={() => popupRef.current.handleShow() }>More...</Button>
+              <Button variant="primary">Choose</Button>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
+      <Popup ref={popupRef} {...data}/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
